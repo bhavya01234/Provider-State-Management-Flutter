@@ -12,7 +12,7 @@ class MyFavScreen extends StatefulWidget {
 class _MyFavScreenState extends State<MyFavScreen> {
   @override
   Widget build(BuildContext context) {
-     final favProvider = Provider.of<FavouriteProvider>(context);
+     // final favProvider = Provider.of<FavouriteProvider>(context);
     print('build');
     return Scaffold(
       appBar: AppBar(
@@ -25,13 +25,18 @@ class _MyFavScreenState extends State<MyFavScreen> {
               child: Icon(Icons.favorite))
         ],
       ),
-      body: Column(
+
+
+
+      body: Consumer<FavouriteProvider>(builder: (context, value, child){
+      return Column(
         children: [
           Expanded(
-            child: ListView.builder(
-                itemCount: favProvider.selectedItem.length,
+            child:
+            ListView.builder(
+                itemCount: value.selectedItem.length,
                 itemBuilder: (context, index){
-                  return Consumer<FavouriteProvider>(builder: (context, value, child){
+
                     return ListTile(
                       onTap: (){
                         if(value.selectedItem.contains(index)){
@@ -46,11 +51,12 @@ class _MyFavScreenState extends State<MyFavScreen> {
                           value.selectedItem.contains(index) ? Icons.favorite : Icons.favorite_border_outlined
                       ),
                     );
-                  });
-                }
+                },
             ),
-          )
+          ),
         ],
+      );
+      },
       ),
     );
   }

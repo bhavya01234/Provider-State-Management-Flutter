@@ -6,7 +6,7 @@ class Home extends StatelessWidget {
   //final int x=10;
   //stless will give error without final* cause then it will be mutable
 
-  //to change x:
+  //to change x: works without final when const that is with home removed
   int x=10;
 
   @override
